@@ -1,4 +1,6 @@
-﻿using System;
+﻿using ChatServer.Commands;
+using ChatServer.Interfaces;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net.Sockets;
@@ -19,6 +21,12 @@ namespace ChatServer
         {
             this.tcpClient = tcpClient;
             this.client = client;
+            CreateCommands();
+        }
+
+        private void CreateCommands()
+        {
+            commands.Add("help",);
         }
 
         public IEnumerator<bool> Run()
@@ -43,9 +51,27 @@ namespace ChatServer
 
         private void ClientFunction()
         {
-            string? dataWrite = null;
-            string? dataRecieved = null;
+            string? data = null;
+            string? returnData = null;
+            bool isConnected = true;
             SendMessage("You joined the server");
+            while (isConnected)
+            {
+                data = reader.ReadLine();
+                if (commands.ContainsKey(data)) returnData = ExecuteCommand(commands[data]);
+                else returnData = $"Command {data} was not found, use command \"help\" for list of commands ";
+            }
+        }
+
+        private string ExecuteCommand(ICommand command)
+        {
+            string retrunData;
+            try
+            {
+                command.Execute();
+                command
+            }
+            return 
         }
 
         private void SendMessage(string message)
