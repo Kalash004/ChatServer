@@ -3,24 +3,18 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using System.Windows.Input;
+using ChatServer.Interfaces;
 
 namespace ChatServer.Commands
 {
     public abstract class AbstractCommand:ICommand
     {
-        private string description;
+        private string? description;
+        private string? result;
+        public string? Description { get => description; set => description = value; }
+        public string? Result { get => result; set => result = value; }
 
-        public event EventHandler? CanExecuteChanged;
-
-        public bool CanExecute(object? parameter)
-        {
-            throw new NotImplementedException();
-        }
-
-        public void Execute(object? parameter)
-        {
-            throw new NotImplementedException();
-        }
+        public abstract bool CanExecute(object? parameter);
+        public abstract void Execute(object? parameter);
     }
 }

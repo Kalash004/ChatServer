@@ -1,0 +1,17 @@
+D:\Documents\C#\ChatServer\ChatServer\bin\Debug\net6.0\ChatServer.exe
+D:\Documents\C#\ChatServer\ChatServer\bin\Debug\net6.0\ChatServer.deps.json
+D:\Documents\C#\ChatServer\ChatServer\bin\Debug\net6.0\ChatServer.runtimeconfig.json
+D:\Documents\C#\ChatServer\ChatServer\bin\Debug\net6.0\ChatServer.dll
+D:\Documents\C#\ChatServer\ChatServer\bin\Debug\net6.0\ChatServer.pdb
+D:\Documents\C#\ChatServer\ChatServer\bin\Debug\net6.0\OneOf.dll
+D:\Documents\C#\ChatServer\ChatServer\obj\Debug\net6.0\ChatServer.csproj.AssemblyReference.cache
+D:\Documents\C#\ChatServer\ChatServer\obj\Debug\net6.0\ChatServer.GeneratedMSBuildEditorConfig.editorconfig
+D:\Documents\C#\ChatServer\ChatServer\obj\Debug\net6.0\ChatServer.AssemblyInfoInputs.cache
+D:\Documents\C#\ChatServer\ChatServer\obj\Debug\net6.0\ChatServer.AssemblyInfo.cs
+D:\Documents\C#\ChatServer\ChatServer\obj\Debug\net6.0\ChatServer.csproj.CoreCompileInputs.cache
+D:\Documents\C#\ChatServer\ChatServer\obj\Debug\net6.0\ChatServer.csproj.CopyComplete
+D:\Documents\C#\ChatServer\ChatServer\obj\Debug\net6.0\ChatServer.dll
+D:\Documents\C#\ChatServer\ChatServer\obj\Debug\net6.0\refint\ChatServer.dll
+D:\Documents\C#\ChatServer\ChatServer\obj\Debug\net6.0\ChatServer.pdb
+D:\Documents\C#\ChatServer\ChatServer\obj\Debug\net6.0\ChatServer.genruntimeconfig.cache
+D:\Documents\C#\ChatServer\ChatServer\obj\Debug\net6.0\ref\ChatServer.dll

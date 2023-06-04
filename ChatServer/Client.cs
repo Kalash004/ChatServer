@@ -2,7 +2,7 @@
 {
     public class Client
     {
-        private string nick;
-        private string pass;
+        private string? nick;
+        private string? pass;
     }
 }

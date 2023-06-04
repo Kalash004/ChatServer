@@ -1,5 +1,6 @@
 ﻿using ChatServer.Commands;
 using ChatServer.Interfaces;
+using OneOf;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -15,31 +16,33 @@ namespace ChatServer
         private TcpClient tcpClient;
         private StreamReader reader;
         private StreamWriter writer;
-        private Dictionary<string, ICommand> commands = new Dictionary<string, ICommand>();
+        private Dictionary<string, AbstractCommand> commands = new Dictionary<string, AbstractCommand>();
 
         public Circuit(Client client, TcpClient tcpClient)
         {
             this.tcpClient = tcpClient;
             this.client = client;
-            CreateCommands();
+            CreateCommands(client, tcpClient);
+            reader = new StreamReader(tcpClient.GetStream(), Encoding.UTF8);
+            writer = new StreamWriter(tcpClient.GetStream(), Encoding.UTF8);
         }
 
-        private void CreateCommands()
+        private void CreateCommands(Client client, TcpClient tcpClient)
         {
-            commands.Add("help",);
+            commands.Add("help", new HelpCommand(this.commands));
         }
 
         public IEnumerator<bool> Run()
         {
-            reader = new StreamReader(tcpClient.GetStream(), Encoding.UTF8);
-            writer = new StreamWriter(tcpClient.GetStream(), Encoding.UTF8);
             bool isRunning = true;
-            while (isRunning) 
+            while (isRunning)
             {
                 try
                 {
                     ClientFunction();
-                } catch (Exception e) {
+                }
+                catch (Exception e)
+                {
                     Console.WriteLine(e.ToString());
                     SendMessage($"Error happened, your circuit was closed. ErrCode: {e.Message}");
                     isRunning = false;
@@ -58,26 +61,52 @@ namespace ChatServer
             while (isConnected)
             {
                 data = reader.ReadLine();
-                if (commands.ContainsKey(data)) returnData = ExecuteCommand(commands[data]);
-                else returnData = $"Command {data} was not found, use command \"help\" for list of commands ";
+                returnData = ReadAndExecuteCommand(data);
+                SendMessage(returnData);
             }
         }
 
-        private string ExecuteCommand(ICommand command)
+        private string? ReadAndExecuteCommand(string data)
         {
-            string retrunData;
+            if (data == null) return "";
+            if (!commands.ContainsKey(data)) return $"Command {data} was not found, use command \"help\" for list of commands";
+            OneOf<string,bool> result = ExecuteCommand(commands[data]);
+            string? returnData = null;
+            bool executed;
+            if (result.TryPickT0(out returnData, out executed)) return returnData;
+            if (executed) return $"Command {data} was executed successfuly";
+            return $"Command {data} was NOT executed";
+        }
+
+
+        /// <summary>
+        /// Executes command depending on the string from client
+        /// </summary>
+        /// <param name="command">command to execute</param>
+        /// <returns>One of (string, bool) case: bool => returns if command was executed or not. case: string => text to return to the client </returns>
+        private OneOf<string, bool> ExecuteCommand(AbstractCommand command)
+        {
+            string? retrunData = null;
             try
             {
-                command.Execute();
-                command
+                command.Execute(null);
+                if (command.Result != null)
+                {
+                    retrunData = command.Result.ToString();
+                }
             }
-            return 
+            catch (Exception e)
+            {
+                Console.WriteLine($"Exception occurred {e.Message}");
+                return false;
+            }
+            if (retrunData != null) return retrunData;
+            return true;
         }
 
         private void SendMessage(string message)
         {
             writer.WriteLine(message);
-
         }
     }
 }

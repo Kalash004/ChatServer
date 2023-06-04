@@ -4,7 +4,6 @@ namespace ChatServer.Interfaces
 {
     public interface ICommand
     {
-        void Execute();
-        AbstractCommand getCommand();
+        void Execute(object? parameter);
     }
 }

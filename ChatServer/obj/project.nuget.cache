@@ -1,8 +1,10 @@
 {
   "version": 2,
-  "dgSpecHash": "Yzgq3thrRzQvrrkMBnUyeHG7Fp1mpg5yBo3spftZ8+8QN+j/h4RU3EouVxtSwR58V/rLKFB431ghAZCalyiw5Q==",
+  "dgSpecHash": "79lI38Id/FadImdk2s+TJI/8gu1ZbZn0BANexmZ6jw0NhuSrPNemJjbsNL94W8ooW/FitG2am74Wo4jJsHCBNA==",
   "success": true,
-  "projectFilePath": "M:\\csharp\\End\\ChatServer\\ChatServer\\ChatServer.csproj",
-  "expectedPackageFiles": [],
+  "projectFilePath": "D:\\Documents\\C#\\ChatServer\\ChatServer\\ChatServer.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\Anton\\.nuget\\packages\\oneof\\3.0.243\\oneof.3.0.243.nupkg.sha512"
+  ],
   "logs": []
 }
